@@ -28,7 +28,7 @@ def index(request):
             }
         return JsonResponse(data)
 
-
+# them model moi vao db (testing)
 def add_model_to_db(request):
     response = HttpResponse()
     response.write("fail to add db!")
@@ -40,6 +40,7 @@ def add_model_to_db(request):
         response.write("OK")
     return response
 
+# lay du lieu ra tu db 
 def get_model_detail(request,ver):
     response = HttpResponse()
     if request.method == 'GET':

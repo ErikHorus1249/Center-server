@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpRequest, HttpResponseServerError, JsonResponse
 from . model import hashModelH5
 import json
+from .models import DLModel
+
 # Create your views here.
 def index(request):
     # bam model moi
@@ -25,6 +27,27 @@ def index(request):
                 'link':'invalid'
             }
         return JsonResponse(data)
+
+
+def add_model_to_db(request):
+    response = HttpResponse()
+    response.write("fail to add db!")
+    if request.method == 'GET' and request.GET['pmodel']:
+        name = request.GET['pmodel']
+        version = "v1.1"
+        dl_model = DLModel(name=name,version=version)
+        dl_model.save()
+        response.write("OK")
+    return response
+
+def get_model_detail(request,ver):
+    response = HttpResponse()
+    if request.method == 'GET':
+        model_obj = DLModel.objects.get(version=ver)
+        response.write(model_obj.name)
+    else:
+        response.write("Fail to get data")
+    return response
 
 
 def save_data(request):

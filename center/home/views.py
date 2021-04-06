@@ -29,13 +29,12 @@ def index(request):
         return JsonResponse(data)
 
 # them model moi vao db (testing)
-def add_model_to_db(request):
+def add_model_to_db(request,ver):
     response = HttpResponse()
     response.write("fail to add db!")
-    if request.method == 'GET' and request.GET['pmodel']:
-        name = request.GET['pmodel']
-        version = "v1.1"
-        dl_model = DLModel(name=name,version=version)
+    if request.method == 'GET' and request.GET['purl']:
+        url = request.GET['purl']
+        dl_model = DLModel(modelUrl=url, modelVersion=ver)
         dl_model.save()
         response.write("OK")
     return response

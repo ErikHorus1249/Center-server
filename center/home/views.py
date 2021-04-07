@@ -3,6 +3,9 @@ from django.http import HttpResponse, HttpRequest, HttpResponseServerError, Json
 from . model import hashModelH5
 import json
 from .models import DLModel
+from django.core.files.storage import FileSystemStorage
+from django.shortcuts import render, redirect
+
 
 # Create your views here.
 def index(request):
@@ -65,3 +68,9 @@ def save_data(request):
             HttpResponseServerError("Malformed data!")
         
     return response
+
+def home(request):
+    documents = Document.objects.all()
+    return render(request, './home/model/index.html',{'documents':documents})
+
+

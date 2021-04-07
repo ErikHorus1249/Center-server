@@ -7,6 +7,15 @@ from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
 import coreapi
 from rest_framework.schemas import AutoSchema
+from rest_framework.views import APIView
+from rest_framework import permissions
+from rest_framework.response import Response
+
+class test_swagger(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request, format=None):
+        return Response("OK")
 
 
 # Create your views here.

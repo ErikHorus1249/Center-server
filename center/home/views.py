@@ -5,6 +5,8 @@ import json
 from .models import DLModel
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
+import coreapi
+from rest_framework.schemas import AutoSchema
 
 
 # Create your views here.

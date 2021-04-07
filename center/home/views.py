@@ -43,8 +43,12 @@ def add_model_to_db(request,ver):
 def get_model_detail(request,ver):
     response = HttpResponse()
     if request.method == 'GET':
-        model_obj = DLModel.objects.get(version=ver)
-        response.write(model_obj.name)
+        model_obj = DLModel.objects.get(modelVersion=ver) # compare version 
+        data = { # data's type is json 
+            "version":model_obj.modelVersion,
+            "url":model_obj.modelUrl
+        }
+        return JsonResponse(data)
     else:
         response.write("Fail to get data")
     return response

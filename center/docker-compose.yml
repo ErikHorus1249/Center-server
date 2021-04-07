@@ -7,24 +7,24 @@ services:
     volumes:
       - ./data/db:/var/lib/postgresql/data
     env_file: 
-      - ./center/.env.db
+      - .env.db
     restart: unless-stopped
     networks: 
       iot-analyzer-api_iotanalyzer:
     
   center-server:
     build: 
-      context: ./center
+      context: ./
       args:
         DJANGO_ALLOWED_HOSTS: "*"
         DJANGO_SECRET_KEY: "*"
         DJANGO_CORS_ORIGIN_WHITELIST: "*"
     env_file:
-      - ./center/.env.dev
+      - .env.dev
     container_name: center-server
     command: python manage.py runserver 0.0.0.0:8080
     volumes:
-      - ./center:/center
+      - ./:/center
     ports:
       - "8080:8080"
     depends_on:

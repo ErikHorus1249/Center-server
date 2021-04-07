@@ -5,6 +5,8 @@ name = "pypi"
 
 [packages]
 django-rest-swagger = "*"
+drf-yasg = "*"
+drf-spectacular = "*"
 
 [dev-packages]
 

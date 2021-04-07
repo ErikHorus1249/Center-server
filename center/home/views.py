@@ -5,72 +5,42 @@ import json
 from .models import DLModel
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
+import coreapi
+from rest_framework.schemas import AutoSchema
+from rest_framework.views import APIView
+from rest_framework import permissions
+from rest_framework.response import Response
 
+class test_swagger(APIView):
+    permission_classes = [permissions.IsAuthenticated]
 
-# Create your views here.
-def index(request):
-    # bam model moi
-    server_hashcode = hashModelH5.hashModel()
-    data = {}
-    if request.method == 'GET':
+    def get(self, request, format=None):
+        return Response("OK")
 
-        response = HttpResponse()
-        ana_hashcode = request.GET['q']
-        
-        # so khop voi model vua duoc gui den 
-        response.writelines("server:"+server_hashcode)
-        if hashModelH5.compareModel(server_hashcode,ana_hashcode):
-            data = {
-                'link':'https://raw.githubusercontent.com/ErikHorus1249/Web_Tutorials/master/DjangoTurtorial/turtorial1/home/model/hashModelH5.py'
-                # add version + save db : 
-                # su dung version so sanh
+class get_model_by_version(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request, ver, format=None):
+        model_obj = DLModel.objects.get(modelVersion=ver) # compare version 
+        if model_obj :
+            data = { # data's type is json 
+                "version":model_obj.modelVersion,
+                "url":model_obj.modelUrl
             }
+            return Response(data)
         else:
-            data = {
-                'link':'invalid'
-            }
-        return JsonResponse(data)
+            return Response("Fail to get model")
 
-# them model moi vao db (testing)
-def add_model_to_db(request,ver):
-    response = HttpResponse()
-    response.write("fail to add db!")
-    if request.method == 'GET' and request.GET['purl']:
-        url = request.GET['purl']
+
+class add_model_manual(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request, ver, url, format=None):
         dl_model = DLModel(modelUrl=url, modelVersion=ver)
         dl_model.save()
-        response.write("OK")
-    return response
-
-# lay du lieu ra tu db 
-def get_model_detail(request,ver):
-    response = HttpResponse()
-    if request.method == 'GET':
-        model_obj = DLModel.objects.get(modelVersion=ver) # compare version 
-        data = { # data's type is json 
-            "version":model_obj.modelVersion,
-            "url":model_obj.modelUrl
-        }
-        return JsonResponse(data)
-    else:
-        response.write("Fail to get data")
-    return response
-
-
-def save_data(request):
-    response = HttpResponse()
-    if request.method == 'POST':
-        json_data = json.loads(request.body) # request.raw_post_data w/ Django < 1.4
-        try:
-            data = json_data['data']
-            response.write(data)
-        except KeyError:
-            HttpResponseServerError("Malformed data!")
+        return Response("Add successfully .") 
         
-    return response
 
-def home(request):
-    documents = Document.objects.all()
-    return render(request, './home/model/index.html',{'documents':documents})
+
 
 

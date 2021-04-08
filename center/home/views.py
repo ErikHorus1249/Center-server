@@ -49,7 +49,7 @@ class upload_model(APIView):
     def get(self, format=None):
         pass
 
-
+# dont using swagger api 
 def fileUploaderView(request):
         if request.method == 'POST':
             form = UploadFileForm(request.POST, request.FILES)

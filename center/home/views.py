@@ -13,6 +13,7 @@ from rest_framework.response import Response
 from . forms import UploadFileForm
 from django.db import models
 import os
+from django.views.generic import TemplateView
 
 class test_swagger(APIView):
     permission_classes = [permissions.IsAuthenticated]

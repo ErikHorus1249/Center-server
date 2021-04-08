@@ -10,6 +10,8 @@ from rest_framework.schemas import AutoSchema
 from rest_framework.views import APIView
 from rest_framework import permissions
 from rest_framework.response import Response
+from . forms import UploadFileForm
+from django.db import models
 
 class test_swagger(APIView):
     permission_classes = [permissions.IsAuthenticated]
@@ -41,6 +43,25 @@ class add_model_manual(APIView):
         return Response("Add successfully .") 
         
 
+class upload_model(APIView):
+
+    def get(self, format=None):
+        pass
 
 
-
+def fileUploaderView(request):
+        if request.method == 'POST':
+            form = UploadFileForm(request.POST, request.FILES)
+            if form.is_valid():
+                upload(request.FILES['file'])
+                return "<h2>File uploaded successful!</h2>"
+            else:
+                return "<h2>File uploaded not successful!</h2>"
+    
+        form = UploadFileForm()
+        return render(request, 'fileUploaderTemplate.html', {'form':form})
+  
+def upload(f): 
+    file = open(f.name, 'wb+') 
+    for chunk in f.chunks():
+        file.write(chunk)

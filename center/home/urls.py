@@ -9,5 +9,7 @@ urlpatterns = [
     path('home/test_swagger', views.test_swagger.as_view()),
     path('home/get_model/<str:ver>', views.get_model_by_version.as_view()),
     path('home/add_model_manual/<str:ver>/<str:url>', views.add_model_manual.as_view()),
+    path('home/upload_model/', views.upload_model.as_view()),
+    path('home/upload_test', views.fileUploaderView)
 ]
 

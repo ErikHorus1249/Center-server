@@ -130,6 +130,9 @@ STATIC_ROOT = os.path.join(VENV_PATH, 'static_root')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+MODEL_FILE_URL = '/models'
+MODEL_FILE_ROOT = os.path.join(BASE_DIR, 'model/models')
+
 REST_FRAMEWORK = { 'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema' }
 
 REST_FRAMEWORK = {

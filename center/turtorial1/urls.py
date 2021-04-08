@@ -51,10 +51,14 @@ urlpatterns = [
     path('', include(router.urls)),
     path('home/', include('home.urls')),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
-    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('api/swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('openapi/', gsv(
         title="Center Server API",
         description="API developers hpoing to use our service",
     ), name='openapi-schema'),
+    path('docs/', TemplateView.as_view(
+        template_name='documentation.html',
+        extra_context={'schema_url':'openapi-schema'}
+    ), name='swagger-ui'),
 ]

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'drf_spectacular',
     'rest_framework',
+    'rest_framework_swagger',
     'drf_yasg',
     'api',
     'home',
@@ -131,6 +132,10 @@ STATIC_ROOT = os.path.join(VENV_PATH, 'static_root')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+TEMPLATE_DIRS = [
+    '/center/api/templates',
+]
+
 MODEL_FILE_URL = '/models'
 MODEL_FILE_ROOT = os.path.join(BASE_DIR, 'model/models')
 
@@ -140,3 +145,4 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
     # 'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
+

@@ -50,6 +50,10 @@ class upload_model(APIView):
     def get(self, format=None):
         pass
 
+# class upload_file_view(APIView):
+#     permission_classes = [permissions.IsAuthenticated]
+
+
 # dont using swagger api 
 def fileUploaderView(request):
         if request.method == 'POST':

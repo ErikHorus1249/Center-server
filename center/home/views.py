@@ -13,6 +13,7 @@ from rest_framework.response import Response
 from . forms import UploadFileForm
 from django.db import models
 import os
+from django.views.generic import TemplateView
 
 class test_swagger(APIView):
     permission_classes = [permissions.IsAuthenticated]
@@ -49,7 +50,11 @@ class upload_model(APIView):
     def get(self, format=None):
         pass
 
+# class upload_file_view(APIView):
+#     permission_classes = [permissions.IsAuthenticated]
 
+
+# dont using swagger api 
 def fileUploaderView(request):
         if request.method == 'POST':
             form = UploadFileForm(request.POST, request.FILES)

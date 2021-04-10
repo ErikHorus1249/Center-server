@@ -153,3 +153,7 @@ REST_FRAMEWORK = {
 APPEND_SLASH=False
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+SWAGGER_SETTINGS = {
+    
+}

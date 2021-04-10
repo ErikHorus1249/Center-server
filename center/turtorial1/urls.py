@@ -28,6 +28,8 @@ from drf_yasg import openapi
 from rest_framework import routers
 from django.views.generic import TemplateView
 
+from django.conf.urls import url, include
+
 router = routers.DefaultRouter()
 
 schema_view = get_schema_view(
@@ -46,6 +48,7 @@ schema_view = get_schema_view(
 
 
 urlpatterns = [
+    path('steppenwolf/', include('steppenwolf.urls')),
     path('api', include('api.urls')),
     path('admin/', admin.site.urls),
     path('', include(router.urls)),

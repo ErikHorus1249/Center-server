@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework_swagger',
     'drf_yasg',
     'api',
+    'steppenwolf',
     'home',
 ]
 
@@ -149,3 +150,4 @@ REST_FRAMEWORK = {
     # 'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
+APPEND_SLASH=False

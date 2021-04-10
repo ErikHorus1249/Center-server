@@ -1,8 +1,7 @@
-from django.urls import path
+from django.urls import path, include
 from rest_framework.urlpatterns import format_suffix_patterns
 from api import views
 
-from django.urls import path, include
 from rest_framework import routers
 from .views import UploadViewSet
 
